@@ -1,15 +1,13 @@
-// authentification/AuthPage.js
-
 import React, { useEffect } from 'react';
 import AuthForm from './AuthForm';
 import UserMenu from './UserMenu';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUser } from './authRequests';
-import { fetchContacts } from '../redux/contacts/contactsRequests'; // Update the import path
+import { fetchContacts } from '../redux/contacts/contactsRequests';
 
 function AuthPage() {
   const token = useSelector((state) => state.auth.token);
-  const userId = useSelector((state) => state.auth.userId); // We need the userId to fetch contacts
+  const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from 'redux/store';
@@ -11,11 +10,10 @@ import Filter from './filter/Filter';
 import { baseURL } from 'authentification/api';
 import axios from 'axios';
 function App() {
-  const token = useSelector((state) => state.auth.token);
-  axios.get(baseURL+'/contacts')
-  .then((response) => {
+  const token = useSelector(state => state.auth.token);
+  axios.get(baseURL + '/contacts').then(response => {
     console.log(response);
-  })
+  });
 
   return (
     <Provider store={store}>
@@ -25,16 +23,13 @@ function App() {
           <>
             <UserMenu />
             <ContactForm />
-            <Filter/>
+            <Filter />
             <ContactList />
-            
           </>
         ) : (
-          
           <AuthPage />
         )}
       </div>
-      
     </Provider>
   );
 }

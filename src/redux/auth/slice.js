@@ -1,4 +1,3 @@
-// authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import { signUpUser,  loginUser, logoutUser, getCurrentUser } from 'authentification/authRequests';
 import { setAuthToken } from 'authentification/api';
@@ -20,7 +19,7 @@ const authSlice = createSlice({
       .addCase(signUpUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload;
-        setAuthToken(action.payload); // Встановлюємо токен у заголовок при успішній реєстрації
+        setAuthToken(action.payload);
       })
       .addCase(signUpUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -33,7 +32,7 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload;
-        setAuthToken(action.payload); // Встановлюємо токен у заголовок при успішному вході
+        setAuthToken(action.payload);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -47,7 +46,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.token = null;
         state.userEmail = null;
-        setAuthToken(null); // Видаляємо токен з заголовка при виході
+        setAuthToken(null);
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -61,7 +60,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.token = action.payload.token;
         state.userEmail = action.payload.userEmail;
-        setAuthToken(action.payload.token); // Встановлюємо токен у заголовок при отриманні даних про користувача
+        setAuthToken(action.payload.token);
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
         state.isLoading = false;

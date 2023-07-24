@@ -1,4 +1,3 @@
-// api.js
 import axios from 'axios';
 
 const baseURL = 'https://connections-api.herokuapp.com';
