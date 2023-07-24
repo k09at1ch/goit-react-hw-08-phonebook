@@ -7,11 +7,14 @@ function ContactList() {
   const contacts = useSelector((state) => state.contacts.items);
   const searchTerm = useSelector((state) => state.filter.searchTerm);
   const isLoading = useSelector((state) => state.contacts.isLoading);
+  const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (userId) {
+      dispatch(fetchContacts(userId));
+    }
+  }, [userId, dispatch]);
 
   const handleDeleteContact = async (contactId) => {
     try {

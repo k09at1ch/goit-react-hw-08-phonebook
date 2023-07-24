@@ -1,20 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-export const fetchContacts = createAsyncThunk('contacts/fetchContacts', async () => {
+import { baseURL } from 'authentification/api';
+// contactsRequests.js
+export const fetchContacts = createAsyncThunk('contacts/fetchContacts', async (userId, { getState }) => {
+  const token = getState().auth.token;
   try {
-    const response = await axios.get('https://64b0f877062767bc48256aba.mockapi.io/contacts');
-    const data = response.data;
-    const contacts = data.map(({ id, name, phone }) => ({
-      id,
-      name,
-      phone,
-    }));
-    return contacts;
+    const response = await axios.get(`${baseURL}/contacts`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        userId,
+      },
+    });
+    return response.data;
   } catch (error) {
     throw new Error(error.message);
   }
 });
+
 
 export const addContact = createAsyncThunk('contacts/addContact', async (contact) => {
   try {
@@ -34,3 +38,4 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async (c
     throw new Error(error.message);
   }
 });
+
