@@ -21,12 +21,8 @@ function App() {
     if (currentPath === '/goit-react-hw-08-phonebook/contacts' && !hasToken) {
       navigate('/login');
     }
-  }, [ navigate]);
-  useEffect(()=>{
-        if (currentPath === '/goit-react-hw-08-phonebook/register') {
-      navigate('/login');
-    }
-  }, [])
+  }, [currentPath, navigate]);
+
 //__________________________________________________________________________________________________//
 
 
