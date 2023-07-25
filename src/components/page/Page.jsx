@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import AuthPage from 'authentification/AuthPage';
 import ContactForm from '../contactForm/ContactForm';
 import ContactList from '../contactList/ContactList';

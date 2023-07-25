@@ -1,7 +1,7 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, {  useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signUpUser, loginUser, logoutUser } from './authRequests';
+import { signUpUser, loginUser } from './authRequests';
 import styles from '../components/contactForm/ContactForm.module.css'
 function AuthForm() {
   const [name, setName] = useState('');
