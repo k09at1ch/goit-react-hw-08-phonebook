@@ -1,4 +1,7 @@
-input {
-    margin: 10px;
-    padding: 8px;
-  }
+.input {
+  margin: 0;
+  padding: 8px;
+  height: 24px;
+  width: 96;
+  border-radius: 6px;
+}

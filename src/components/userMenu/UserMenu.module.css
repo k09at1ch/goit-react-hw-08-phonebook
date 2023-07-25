@@ -1,16 +1,4 @@
-.list {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-  }
-  
-  .listItem {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 18px;
-  }
-  
-  .button {
+.button {
     background-color: red;
     color: #fff;
     border: none;

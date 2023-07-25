@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from '../../redux/contacts/contactsRequests';
+import {
+  fetchContacts,
+  deleteContact,
+} from '../../redux/contacts/contactsRequests';
 import styles from './ContactList.module.css';
-
 function ContactList() {
-  const contacts = useSelector((state) => state.contacts.items);
-  const searchTerm = useSelector((state) => state.filter.searchTerm);
-  const isLoading = useSelector((state) => state.contacts.isLoading);
-  const userId = useSelector((state) => state.auth.userId);
+  const contacts = useSelector(state => state.contacts.items);
+  const searchTerm = useSelector(state => state.filter.searchTerm);
+  const isLoading = useSelector(state => state.contacts.isLoading);
+  const userId = useSelector(state => state.auth.userId);
   const dispatch = useDispatch();
+  const [responseContacts, setResponseContacts] = useState([]);
 
   useEffect(() => {
-    if (userId) {
-      dispatch(fetchContacts(userId));
-    }
-  }, [userId, dispatch]);
+    dispatch(fetchContacts(userId));
+  }, [dispatch, userId]);
 
-  const handleDeleteContact = async (contactId) => {
+  useEffect(() => {
+    setResponseContacts(contacts);
+  }, [contacts]);
+
+  const handleDeleteContact = async contactId => {
     try {
       await dispatch(deleteContact(contactId));
     } catch (error) {
@@ -24,7 +29,7 @@ function ContactList() {
     }
   };
 
-  const formatPhoneNumber = (phoneNumber) => {
+  const formatPhoneNumber = phoneNumber => {
     const index = phoneNumber.indexOf('x');
     if (index !== -1) {
       return phoneNumber.substring(0, index).replace(/\D/g, '');
@@ -32,8 +37,10 @@ function ContactList() {
     return phoneNumber.replace(/\D/g, '');
   };
 
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name && contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredContacts = responseContacts.filter(
+    contact =>
+      contact.name &&
+      contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (isLoading) {
@@ -47,13 +54,16 @@ function ContactList() {
   return (
     <div>
       <ul className={styles.list}>
-        {filteredContacts.map((contact) => (
+        {filteredContacts.map(contact => (
           <li key={contact.id} className={styles.listItem}>
             {contact.name}
             <br />
-            {formatPhoneNumber(contact.phone)}
-            <button onClick={() => handleDeleteContact(contact.id)}>Delete</button>
-            <br /><br />
+            {formatPhoneNumber(contact.number)}
+            <button className={styles.button} onClick={() => handleDeleteContact(contact.id)}>
+              Delete
+            </button>
+            <br />
+            <br />
           </li>
         ))}
       </ul>

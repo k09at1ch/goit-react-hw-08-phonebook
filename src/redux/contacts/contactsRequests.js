@@ -26,7 +26,7 @@ export const addContact = createAsyncThunk(
   async contact => {
     try {
       const response = await axios.post(
-        'https://64b0f877062767bc48256aba.mockapi.io/contacts',
+        'https://connections-api.herokuapp.com/contacts',
         contact
       );
       const newContact = response.data;
@@ -42,7 +42,7 @@ export const deleteContact = createAsyncThunk(
   async contactId => {
     try {
       await axios.delete(
-        `https://64b0f877062767bc48256aba.mockapi.io/contacts/${contactId}/`
+        `https://connections-api.herokuapp.com/contacts/${contactId}/`
       );
       return contactId;
     } catch (error) {

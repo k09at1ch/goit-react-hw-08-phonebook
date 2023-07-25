@@ -1,50 +1,38 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { signUpUser, loginUser, logoutUser } from './authRequests';
-
+import styles from '../components/contactForm/ContactForm.module.css'
 function AuthForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
-
-  const handleNameChange = (event) => {
+  const [logging, setLogging] = useState(true);
+  const handleNameChange = event => {
     setName(event.target.value);
   };
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = event => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = event => {
     setPassword(event.target.value);
   };
 
-  const handleLoginEmailChange = (event) => {
+  const handleLoginEmailChange = event => {
     setLoginEmail(event.target.value);
   };
 
-  const handleLoginPasswordChange = (event) => {
+  const handleLoginPasswordChange = event => {
     setLoginPassword(event.target.value);
   };
 
-  const handleLogout = async () => {
-    try {
-      await dispatch(logoutUser());
-      localStorage.removeItem('token');
-      setName('');
-      setLoginEmail('');
-      setLoginPassword('');
-    } catch (error) {
-      console.error('Logout error:', error.message);
-    }
-  };
-
-  const handleSignUpSubmit = async (event) => {
+  const handleSignUpSubmit = async event => {
     event.preventDefault();
 
     if (!email || !password || !name) {
@@ -64,10 +52,12 @@ function AuthForm() {
       setPassword('');
     } catch (error) {
       console.error('Signup error:', error.message);
+      return;
     }
+    navigate('/contacts');
   };
 
-  const handleLoginSubmit = async (event) => {
+  const handleLoginSubmit = async event => {
     event.preventDefault();
 
     if (!loginEmail || !loginPassword) {
@@ -85,54 +75,72 @@ function AuthForm() {
       setLoginPassword('');
     } catch (error) {
       console.error('Login error:', error.message);
+      return;
     }
+    navigate('/contacts');
   };
-
+  const handleLoggingChange=()=>{
+    setLogging(false)
+    navigate('/register')
+  }
+  const handleLoggingChangeSignIn=()=>{
+    setLogging(true)
+    navigate('/login')
+  }
   return (
     <div>
-      <h2>{token ? 'Logged In' : 'Login or Sign Up'}</h2>
-      {token ? (
-        <button onClick={handleLogout}>Logout</button>
+      
+      {logging ? (
+        <div>
+          <h2>Login</h2>
+          <form onSubmit={handleLoginSubmit}>
+            <input
+              type="email"
+              value={loginEmail}
+              onChange={handleLoginEmailChange}
+              placeholder="Email"
+              className={styles.input}
+            />
+            <input
+              type="password"
+              value={loginPassword}
+              onChange={handleLoginPasswordChange}
+              placeholder="Password"
+              className={styles.input}
+            />
+            <button className={styles.button} type="submit">Login</button>
+          </form>
+          <button className={styles.button} onClick={handleLoggingChange}>or Sign Up</button>
+        </div>
       ) : (
+        <div>
+          <h2>Register</h2>
         <form onSubmit={handleSignUpSubmit}>
           <input
             type="text"
             value={name}
             onChange={handleNameChange}
             placeholder="Name"
+            className={styles.input}
           />
           <input
             type="email"
             value={email}
             onChange={handleEmailChange}
             placeholder="Email"
+            className={styles.input}
           />
           <input
             type="password"
             value={password}
             onChange={handlePasswordChange}
             placeholder="Password"
+            className={styles.input}
           />
-          <button type="submit">Sign Up</button>
+          <button type="submit"  className={styles.button}>Sign Up</button>
         </form>
-      )}
-
-      {!token && (
-        <form onSubmit={handleLoginSubmit}>
-          <input
-            type="email"
-            value={loginEmail}
-            onChange={handleLoginEmailChange}
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            value={loginPassword}
-            onChange={handleLoginPasswordChange}
-            placeholder="Password"
-          />
-          <button type="submit">Login</button>
-        </form>
+        <button className={styles.button} onClick={handleLoggingChangeSignIn}>or Sign In</button>
+        </div>
       )}
     </div>
   );

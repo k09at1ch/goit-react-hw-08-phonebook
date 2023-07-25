@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import AuthForm from './AuthForm';
-import UserMenu from './UserMenu';
+import UserMenu from '../components/userMenu/UserMenu';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUser } from './authRequests';
 import { fetchContacts } from '../redux/contacts/contactsRequests';
