@@ -4,7 +4,7 @@ import { useEffect } from "react";
 function RedictWhenLoading(){
     const navigate=useNavigate()
     useEffect(()=>{
-         navigate('/contacts')
+         navigate('/login')
     })
    
     return(

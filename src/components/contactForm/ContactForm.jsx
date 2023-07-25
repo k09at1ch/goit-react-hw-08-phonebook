@@ -7,7 +7,7 @@ function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-
+  
   const handleNameChange = (event) => {
     setName(event.target.value);
   };

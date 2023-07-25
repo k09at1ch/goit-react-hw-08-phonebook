@@ -4,7 +4,6 @@ import { logoutUser } from '../../authentification/authRequests';
 import { useNavigate } from 'react-router-dom';
 import style from './UserMenu.module.css';
 
-
 function UserMenu() {
   const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.userEmail);
