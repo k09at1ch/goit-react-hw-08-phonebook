@@ -1,17 +1,16 @@
 import React from 'react';
-import AuthPage from 'authentification/AuthPage';
+import AuthPage from 'components/authPage/AuthPage';
 import { Route, useNavigate } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Page from './page/Page';
 import RedictWhenLoading from './redict/Redict';
-import { useEffect } from 'react';
-//логіка перевірки входу виконується у App, бо немає елемента, що завжди рендериться, крім App.jsx. 
+import { useEffect } from 'react'; 
 function App() {
 
 
 
 
-  //__________________________________________________________________________________________________//
+  //_____________Це треба, щоб якщо юзер не ввійшов і прописав /contacts, то посилання було ..../login_____//
   const navigate = useNavigate()
   const currentPath = window.location.pathname;
   useEffect(() => {

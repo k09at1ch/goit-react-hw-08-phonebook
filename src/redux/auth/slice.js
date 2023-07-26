@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signUpUser,  loginUser, logoutUser, getCurrentUser } from 'authentification/authRequests';
-import { setAuthToken } from 'authentification/api';
+import { signUpUser,  loginUser, logoutUser, getCurrentUser } from 'redux/auth/authRequests';
+import { setAuthToken } from 'redux/auth/api';
 const authSlice = createSlice({
   name: 'auth',
   initialState: {

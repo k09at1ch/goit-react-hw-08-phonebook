@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { baseURL } from 'authentification/api';
+import { baseURL } from 'redux/auth/api';
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
   async (userId, { getState }) => {

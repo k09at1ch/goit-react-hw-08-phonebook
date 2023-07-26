@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthPage from 'authentification/AuthPage';
+import AuthPage from 'components/authPage/AuthPage';
 import ContactForm from '../contactForm/ContactForm';
 import ContactList from '../contactList/ContactList';
 import UserMenu from 'components/userMenu/UserMenu';

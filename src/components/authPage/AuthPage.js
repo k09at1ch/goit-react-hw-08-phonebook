@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import AuthForm from './AuthForm';
-import UserMenu from '../components/userMenu/UserMenu';
+import AuthForm from '../authForm/AuthForm';
+import UserMenu from '../userMenu/UserMenu';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUser } from './authRequests';
-import { fetchContacts } from '../redux/contacts/contactsRequests';
+import { getCurrentUser } from '../../redux/auth/authRequests';
+import { fetchContacts } from '../../redux/contacts/contactsRequests';
 
 function AuthPage() {
   const token = useSelector((state) => state.auth.token);
